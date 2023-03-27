@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\AnnoncesRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AllAnnoncesController extends AbstractController
 {
@@ -13,6 +13,7 @@ class AllAnnoncesController extends AbstractController
     public function index(AnnoncesRepository $annoncesRepo): Response
     {
         $annonces = $annoncesRepo->findAll();
+
         return $this->render('all_annonces/index.html.twig', [
             'controller_name' => 'AllAnnoncesController',
             'annonces' => $annonces,
