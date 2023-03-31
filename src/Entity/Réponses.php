@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\RéponsesRepository;
+use App\Entity\Annonces;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RéponsesRepository;
 
 #[ORM\Entity(repositoryClass: RéponsesRepository::class)]
 class Réponses
@@ -47,4 +48,19 @@ class Réponses
 
         return $this;
     }
+
+
+    public function getAnnonce(): ?Annonces
+    {
+        return $this->annonce;
+    }
+
+    public function setAnnonce(?Annonces $annonce): self
+    {
+        $this->annonce = $annonce;
+
+        return $this;
+    }
+
+
 }

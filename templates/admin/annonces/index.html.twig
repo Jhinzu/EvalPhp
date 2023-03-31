@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces index{% endblock %}
+
+{% block body %}
+    <h1 class="mx-3">Annonces index</h1>
+
+    <a href="{{ path('app_admin_annonces_new') }}" class="btn btn-primary mx-3">Create new</a>
+    <a href="/annonces" class="btn btn-primary mx-3">Back</a>
+    
+
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Container</th>
+                <th>DateAdd</th>
+                <th>DateMaxPublication</th>
+                <th>Department</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce in annonces %}
+            <tr>
+                <td>{{ annonce.id }}</td>
+                <td>{{ annonce.title }}</td>
+                <td>{{ annonce.type }}</td>
+                <td>{{ annonce.container }}</td>
+                <td>{{ annonce.dateAdd ? annonce.dateAdd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.dateMaxPublication ? annonce.dateMaxPublication|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.department }}</td>
+                <td>{{ annonce.price }}</td>
+                <td>
+                    <a href="{{ path('app_admin_annonces_edit', {'id': annonce.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
