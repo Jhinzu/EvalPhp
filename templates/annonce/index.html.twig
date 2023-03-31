@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce - {{ annonce.title }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid bg-light py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="card-text mx-3"><small class="text-muted">{{ annonce.dateAdd|date('Y-m-d') }}</small></p>
+                    {# <img class="card-img-top" src="{{ annonce.image }}" alt="{{ annonce.title }}"> #}
+                    <h5 class="card-title">{{ annonce.title }}</h5>
+                    <p class="card-text">{{ annonce.container }}</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><small class="text-muted">{{ annonce.type }}</small></p>
+                            <p class="card-text"><small class="text-muted">{{ annonce.department }}</small></p>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end align-items-center">
+                            <h5 class="card-text text-success">{{ annonce.price }}€</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for reponse in annonce.rPonses %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p>{{ reponse.container }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-75">
+                <div class="card-header bg-primary text-white">
+                    Contactez le vendeur
+                </div>
+                <div class="card-body">
+                    {{ form_start(commentaireForm, {'attr': {'class': 'form-inline mt-3'}}) }}
+                    <div class="w-75">
+                        {{ form_row(commentaireForm.container, {'attr': {'class': 'form-control mb-2 mr-sm-2'}}) }}
+                        <div class="d-flex justify-content-end">
+                            {{ form_row(commentaireForm.recherche, {'attr': {'class': 'form-control mb-2 mr-sm-2'}}) }}
+                        </div>
+                    </div>
+                    {{ form_end(commentaireForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

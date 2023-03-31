@@ -39,28 +39,29 @@ class AnnoncesRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Annonces[] Returns an array of Annonces objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Annonces
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //teste
+    public function search(array $criteria)
+    {
+        $qb = $this->createQueryBuilder('a');
+    
+        if (isset($criteria['title']) && !empty($criteria['title'])) {
+            $qb->andWhere('a.title LIKE :title')
+               ->setParameter('title', '%'.$criteria['title'].'%');
+        } else {
+            $qb->andWhere('1=1'); // Ajouter cette ligne pour afficher tous les résultats si le champ "title" est vide
+        }
+    
+        if (isset($criteria['type']) && !empty($criteria['type'])) {
+            $qb->andWhere('a.type = :type')
+               ->setParameter('type', $criteria['type']);
+        }
+    
+        if (isset($criteria['department']) && !empty($criteria['department'])) {
+            $qb->andWhere('a.department = :department')
+               ->setParameter('department', $criteria['department']);
+        }
+    
+        return $qb->getQuery()->getResult();
+    }
+    
 }

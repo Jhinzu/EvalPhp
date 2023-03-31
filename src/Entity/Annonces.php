@@ -37,7 +37,7 @@ class Annonces
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
     private ?string $price = null;
 
-    #[ORM\OneToMany(mappedBy: 'annonce_Id', targetEntity: Réponses::class)]
+    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Réponses::class)]
     private Collection $rPonses;
 
     public function __construct()
@@ -163,4 +163,21 @@ class Annonces
 
         return $this;
     }
+
+    //teste
+
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->getTitle(),
+            'type' => $this->getType(),
+            'department' => $this->getDepartment(),
+        ];
+    }
+
+    public function __toString()
+    {
+        return $this->id ;
+    }
+
 }
